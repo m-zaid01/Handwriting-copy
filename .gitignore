@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+venv/
+.env/
+out/
+glyphs/
+*.png
+*.pdf
+glyph_order_debug.png

@@ -1,0 +1,4 @@
+This is a sample text file for the handwriting PDF renderer.
+You can replace this content with any long text.
+Each line will be wrapped into pages automatically.
+Numbers: 1234567890. Punctuation: ! ? , . ; : ' " - _ ( ) [ ] { }

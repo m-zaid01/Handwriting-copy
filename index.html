@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Handwriting Renderer (Client-side)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="assets/styles.css">
+  <!-- OpenCV.js (client-side image processing) -->
+  <script async src="https://docs.opencv.org/4.x/opencv.js"></script>
+  <!-- jsPDF (client-side PDF export) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Handwriting Renderer</h1>
+
+    <section class="card">
+      <h2>1) Upload Handwriting Sheet and Extract Glyphs</h2>
+      <p class="hint">Write characters with gaps on white paper. Keep the same order you enter below.</p>
+      <div class="row">
+        <div>
+          <label>Sheet image (JPG/PNG)</label>
+          <input type="file" id="sheetInput" accept=".jpg,.jpeg,.png">
+        </div>
+        <div>
+          <label>Character order (exact left→right, top→bottom)</label>
+          <input type="text" id="charsInput" value="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,!?;:'&quot;-_()[]{}">
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>Min area</label>
+            <input type="number" id="minAreaInput" value="140">
+        </div>
+        <div>
+          <label>Row gap</label>
+          <input type="number" id="rowGapInput" value="30">
+        </div>
+        <div>
+          <label>Padding</label>
+          <input type="number" id="padInput" value="10">
+        </div>
+      </div>
+      <button id="extractBtn">Extract Glyphs</button>
+      <p id="extractStatus" class="hint"></p>
+      <canvas id="debugCanvas" class="preview" title="Debug ordering preview (bounding boxes)"></canvas>
+    </section>
+
+    <section class="card">
+      <h2>2) Type Text and Render</h2>
+      <label>Text</label>
+      <textarea id="textInput" rows="5">Hello World!
+This is my handwriting test 123.</textarea>
+
+      <div class="row">
+        <div>
+          <label>Scale</label>
+          <input type="number" step="0.1" id="scaleInput" value="1.0">
+        </div>
+        <div>
+          <label>Letter spacing (px)</label>
+          <input type="number" id="letterSpacingInput" value="4">
+        </div>
+        <div>
+          <label>Space width factor</label>
+          <input type="number" step="0.01" id="spaceFactorInput" value="0.45">
+        </div>
+        <div>
+          <label>Line spacing (px)</label>
+          <input type="number" id="lineSpacingInput" value="22">
+        </div>
+        <div>
+          <label>Vertical jitter (px)</label>
+          <input type="number" id="jitterYInput" value="3">
+        </div>
+      </div>
+
+      <button id="renderBtn">Render Image</button>
+      <canvas id="renderCanvas" class="preview"></canvas>
+      <div class="row">
+        <div>
+          <label>PDF page size</label>
+          <select id="pdfSizeSelect">
+            <option value="A4">A4 (595x842)</option>
+            <option value="LETTER">Letter (612x792)</option>
+          </select>
+        </div>
+        <div>
+          <label>PDF margin (px)</label>
+          <input type="number" id="pdfMarginInput" value="50">
+        </div>
+      </div>
+      <button id="downloadPdfBtn">Download as PDF</button>
+    </section>
+  </div>
+  <script src="assets/app.js"></script>
+</body>
+</html>
